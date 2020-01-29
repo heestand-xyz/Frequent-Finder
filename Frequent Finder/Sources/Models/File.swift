@@ -11,13 +11,14 @@ import Foundation
 struct File: Path {
     var id: URL { url }
     let url: URL
-    var name: String { url.lastPathComponent }    
-    let depth: Int
-    init(_ url: URL, depth: Int = 0) {
+    var name: String { url.lastPathComponent }
+    var depth: Int { url.path.filter({ $0 == "/" }).count }
+    let frequencyCount: Int
+    init(_ url: URL, at frequencyCount: Int) {
         guard FF.exists(url: url) else { fatalError("url dose not exist") }
         guard !FF.isFolder(url: url) else { fatalError("url is not a file") }
         self.url = url
-        self.depth = depth
+        self.frequencyCount = frequencyCount
         log()
     }
     func log() {

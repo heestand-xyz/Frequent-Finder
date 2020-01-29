@@ -12,4 +12,5 @@ protocol Path {
     var url: URL { get }
     var depth: Int { get }
     var name: String { get }
+    var frequencyCount: Int { get }
 }

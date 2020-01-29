@@ -12,13 +12,14 @@ class Folder: Path, ObservableObject {
     var id: URL { url }
     let url: URL
     var name: String { url.lastPathComponent }
-    let depth: Int
+    var depth: Int { url.path.filter({ $0 == "/" }).count }
+    let frequencyCount: Int
     @Published var contents: [Path]?
-    init(_ url: URL, depth: Int = 0) {
+    init(_ url: URL, at frequencyCount: Int) {
         guard FF.exists(url: url) else { fatalError("url dose not exist") }
         guard FF.isFolder(url: url) else { fatalError("url is not a folder") }
         self.url = url
-        self.depth = depth
+        self.frequencyCount = frequencyCount
         log()
     }
     func fetchContents() {
@@ -26,7 +27,9 @@ class Folder: Path, ObservableObject {
         sortContents()
     }
     func sortContents() {
-        contents = contents?.sorted(by: { $0.name.lowercased() < $1.name.lowercased() })
+        contents = contents?.sorted(by: { pathA, pathB -> Bool in
+            pathA.frequencyCount > pathB.frequencyCount
+        })
     }
     func getContents() -> [Path]? {
         do {
@@ -34,7 +37,8 @@ class Folder: Path, ObservableObject {
             let filtered: [String] = paths.filter({ $0.first != "." })
             let urls: [URL] = filtered.map({ url.appendingPathComponent($0) })
             let files: [Path] = urls.map({ url -> Path in
-                FF.isFolder(url: url) ? Folder(url, depth: depth + 1) : File(url, depth: depth + 1)
+                let frequencyCount: Int = FF.frequencyCount(for: url)
+                return FF.isFolder(url: url) ? Folder(url, at: frequencyCount) : File(url, at: frequencyCount)
             })
             return files
         } catch {

@@ -19,7 +19,7 @@ struct FolderView: View {
                         Button(action: {
                             self.ff.goUp()
                         }) {
-                            Text("Back")
+                            Text("<")
                         }
                         .disabled(!ff.canGoUp)
                         Text(folder.name)
@@ -45,6 +45,7 @@ struct FolderView: View {
 
 struct FolderView_Previews: PreviewProvider {
     static var previews: some View {
-        FolderView(folder: Folder(URL(fileURLWithPath: "/Users/hexagons/Documents")))
+        FolderView(folder: Folder(URL(fileURLWithPath: "/Users/hexagons/Documents"), at: -1))
+            .environmentObject(FF.shared)
     }
 }
