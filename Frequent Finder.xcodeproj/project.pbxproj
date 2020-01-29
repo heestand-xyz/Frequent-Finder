@@ -7,14 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		748828A523E20E5E0064B1B7 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748828A423E20E5E0064B1B7 /* File.swift */; };
+		748828A723E215BD0064B1B7 /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748828A623E215BD0064B1B7 /* PathView.swift */; };
+		748828A923E216B60064B1B7 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748828A823E216B60064B1B7 /* FolderView.swift */; };
+		748828AB23E217040064B1B7 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748828AA23E217040064B1B7 /* Folder.swift */; };
+		748828AD23E217180064B1B7 /* Path.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748828AC23E217170064B1B7 /* Path.swift */; };
 		749C6D5623E20A830003DE4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C6D5523E20A830003DE4D /* AppDelegate.swift */; };
 		749C6D5823E20A830003DE4D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C6D5723E20A830003DE4D /* ContentView.swift */; };
 		749C6D5A23E20A840003DE4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 749C6D5923E20A840003DE4D /* Assets.xcassets */; };
 		749C6D5D23E20A840003DE4D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 749C6D5C23E20A840003DE4D /* Preview Assets.xcassets */; };
 		749C6D6023E20A840003DE4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 749C6D5E23E20A840003DE4D /* Main.storyboard */; };
+		749C6D6E23E20AE40003DE4D /* FF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C6D6D23E20AE40003DE4D /* FF.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		748828A423E20E5E0064B1B7 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		748828A623E215BD0064B1B7 /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
+		748828A823E216B60064B1B7 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
+		748828AA23E217040064B1B7 /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
+		748828AC23E217170064B1B7 /* Path.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Path.swift; sourceTree = "<group>"; };
 		749C6D5223E20A830003DE4D /* Frequent Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Frequent Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		749C6D5523E20A830003DE4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		749C6D5723E20A830003DE4D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -23,6 +34,7 @@
 		749C6D5F23E20A840003DE4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		749C6D6123E20A840003DE4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		749C6D6223E20A840003DE4D /* Frequent_Finder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Frequent_Finder.entitlements; sourceTree = "<group>"; };
+		749C6D6D23E20AE40003DE4D /* FF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FF.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +67,8 @@
 		749C6D5423E20A830003DE4D /* Frequent Finder */ = {
 			isa = PBXGroup;
 			children = (
-				749C6D5523E20A830003DE4D /* AppDelegate.swift */,
-				749C6D5723E20A830003DE4D /* ContentView.swift */,
-				749C6D5923E20A840003DE4D /* Assets.xcassets */,
-				749C6D5E23E20A840003DE4D /* Main.storyboard */,
-				749C6D6123E20A840003DE4D /* Info.plist */,
-				749C6D6223E20A840003DE4D /* Frequent_Finder.entitlements */,
-				749C6D5B23E20A840003DE4D /* Preview Content */,
+				749C6D6823E20A920003DE4D /* Sources */,
+				749C6D6923E20A990003DE4D /* Resources */,
 			);
 			path = "Frequent Finder";
 			sourceTree = "<group>";
@@ -72,6 +79,57 @@
 				749C6D5C23E20A840003DE4D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		749C6D6823E20A920003DE4D /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				749C6D5523E20A830003DE4D /* AppDelegate.swift */,
+				749C6D6A23E20AC50003DE4D /* Views */,
+				749C6D6B23E20ACB0003DE4D /* Models */,
+				749C6D6C23E20AD60003DE4D /* Controllers */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		749C6D6923E20A990003DE4D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				749C6D5923E20A840003DE4D /* Assets.xcassets */,
+				749C6D5E23E20A840003DE4D /* Main.storyboard */,
+				749C6D6123E20A840003DE4D /* Info.plist */,
+				749C6D6223E20A840003DE4D /* Frequent_Finder.entitlements */,
+				749C6D5B23E20A840003DE4D /* Preview Content */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		749C6D6A23E20AC50003DE4D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				749C6D5723E20A830003DE4D /* ContentView.swift */,
+				748828A823E216B60064B1B7 /* FolderView.swift */,
+				748828A623E215BD0064B1B7 /* PathView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		749C6D6B23E20ACB0003DE4D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				748828AC23E217170064B1B7 /* Path.swift */,
+				748828A423E20E5E0064B1B7 /* File.swift */,
+				748828AA23E217040064B1B7 /* Folder.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		749C6D6C23E20AD60003DE4D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				749C6D6D23E20AE40003DE4D /* FF.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,7 +204,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				749C6D5823E20A830003DE4D /* ContentView.swift in Sources */,
+				748828A523E20E5E0064B1B7 /* File.swift in Sources */,
+				748828AD23E217180064B1B7 /* Path.swift in Sources */,
+				748828A923E216B60064B1B7 /* FolderView.swift in Sources */,
 				749C6D5623E20A830003DE4D /* AppDelegate.swift in Sources */,
+				748828A723E215BD0064B1B7 /* PathView.swift in Sources */,
+				749C6D6E23E20AE40003DE4D /* FF.swift in Sources */,
+				748828AB23E217040064B1B7 /* Folder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,14 +345,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Frequent Finder/Frequent_Finder.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Frequent Finder/Resources/Frequent_Finder.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"Frequent Finder/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Frequent Finder/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Frequent Finder/Info.plist";
+				INFOPLIST_FILE = "Frequent Finder/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -304,14 +368,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Frequent Finder/Frequent_Finder.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Frequent Finder/Resources/Frequent_Finder.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"Frequent Finder/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Frequent Finder/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "Frequent Finder/Info.plist";
+				INFOPLIST_FILE = "Frequent Finder/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

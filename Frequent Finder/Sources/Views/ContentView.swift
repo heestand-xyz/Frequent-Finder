@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var ff: FF
     var body: some View {
-        Text("Hello, World!")
+        FolderView(folder: ff.currentFolder)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
@@ -19,5 +20,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(FF())
     }
 }
