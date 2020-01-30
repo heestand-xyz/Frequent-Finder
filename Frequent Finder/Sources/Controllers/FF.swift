@@ -8,8 +8,9 @@
 
 import Foundation
 import Cocoa
+import Quartz
 
-class FF: ObservableObject {
+class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDelegate {
     
     static let shared = FF()
     
@@ -23,6 +24,8 @@ class FF: ObservableObject {
     }
     
     @Published var canGoUp: Bool = true
+    
+    var quickLookURL: URL?
     
     typealias Frequency = [URL: Int]
     var frequency: Frequency! {
@@ -39,20 +42,29 @@ class FF: ObservableObject {
         case frequency(String)
     }
         
-    init() {
+    override init() {
+        
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         currentFolder = Folder(url, at: -1)
+        
+        super.init()
+        
         frequency = try! getFrequency()
+        
     }
     
     // MARK: - Navigation
     
     func navigate(to folder: Folder) {
         currentFolder = folder
-        if frequency[folder.url] == nil {
-            frequency[folder.url] = 1
+        incrementFrequency(url: folder.url)
+    }
+    
+    func incrementFrequency(url: URL) {
+        if frequency[url] == nil {
+            frequency[url] = 1
         } else {
-            frequency[folder.url]! += 1
+            frequency[url]! += 1
         }
     }
     
@@ -100,7 +112,12 @@ class FF: ObservableObject {
         fm.fileExists(atPath: url.path)
     }
     
-    // MARK: - Finder
+    // MARK: - Access
+    
+    func open(file: File) {
+        shell("open", file.url.path)
+        incrementFrequency(url: file.url)
+    }
     
     func showInFinder(path: Path) {
         if let folder = path as? Folder {
@@ -110,6 +127,49 @@ class FF: ObservableObject {
         } else {
             NSWorkspace.shared.activateFileViewerSelecting([path.url])
         }
+        incrementFrequency(url: path.url)
     }
     
+    func showInTerminal(folder: Folder) {
+//        guard let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.apple.Terminal") else { return }
+//        print(folder.url.path)
+//        let configuration = NSWorkspace.OpenConfiguration()
+//        configuration.arguments = [folder.url.path]
+//        NSWorkspace.shared.openApplication(at: url,
+//                                           configuration: configuration,
+//                                           completionHandler: nil)
+        shell("open", "-a", "Terminal", folder.url.path)
+        incrementFrequency(url: folder.url)
+    }
+    
+    func quickLook(file: File) {
+        quickLookURL = file.url
+        if let sharedPanel = QLPreviewPanel.shared() {
+            sharedPanel.delegate = self
+            sharedPanel.dataSource = self
+            sharedPanel.makeKeyAndOrderFront(self)
+        }
+        incrementFrequency(url: file.url)
+    }
+    
+    // MARK: - QuickLook Delegates
+
+    func numberOfPreviewItems(in panel: QLPreviewPanel!) -> Int {
+        return 1
+    }
+
+    func previewPanel(_ panel: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
+        quickLookURL! as QLPreviewItem
+    }
+    
+}
+
+@discardableResult
+func shell(_ args: String...) -> Int32 {
+    let task = Process()
+    task.launchPath = "/usr/bin/env"
+    task.arguments = args
+    task.launch()
+    task.waitUntilExit()
+    return task.terminationStatus
 }

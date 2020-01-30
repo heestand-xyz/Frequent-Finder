@@ -13,25 +13,19 @@ struct PathView: View {
     let path: Path
     var body: some View {
         HStack {
-            Group {
-                if path is Folder {
-                    Button(action: {
-                        self.ff.navigate(to: self.path as! Folder)
-                    }) {
-                        Text(path.name)
-                    }
-                    .foregroundColor(Color(hue: 0.5, saturation: frequencyFraction(), brightness: 1.0, opacity: 1.0))
-                } else {
+            if path is Folder {
+                Button(action: {
+                    self.ff.navigate(to: self.path as! Folder)
+                }) {
                     Text(path.name)
                 }
+                .foregroundColor(Color(hue: 0.5, saturation: frequencyFraction(), brightness: 1.0, opacity: 1.0))
+            } else {
+                Text(path.name)
             }
             Text("\(path.frequencyCount)")
                 .opacity(0.5)
-            Button(action: {
-                self.ff.showInFinder(path: self.path)
-            }) {
-                Text("Finder")
-            }
+            PathActionView(path: path)
         }
     }
     func frequencyFraction() -> Double {

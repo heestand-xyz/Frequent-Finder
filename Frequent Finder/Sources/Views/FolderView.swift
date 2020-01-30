@@ -24,10 +24,15 @@ struct FolderView: View {
                         .disabled(!ff.canGoUp)
                         Text(folder.name)
                             .font(.headline)
+                        PathActionView(path: folder as Path)
                     }
                 }) {
-                    ForEach(folder.contents ?? [], id: \.url) { path in
-                        PathView(path: path)
+                    if folder.contents != nil {
+                        ForEach(folder.contents!, id: \.url) { path in
+                            PathView(path: path)
+                        }
+                    } else {
+                        Text("Folder is loading or there are no files in folder.")
                     }
                 }
             }

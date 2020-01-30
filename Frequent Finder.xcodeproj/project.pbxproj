@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3ADD568723E2CD0400551F75 /* PathActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD568623E2CD0400551F75 /* PathActionView.swift */; };
 		748828A523E20E5E0064B1B7 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748828A423E20E5E0064B1B7 /* File.swift */; };
 		748828A723E215BD0064B1B7 /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748828A623E215BD0064B1B7 /* PathView.swift */; };
 		748828A923E216B60064B1B7 /* FolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748828A823E216B60064B1B7 /* FolderView.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3ADD568623E2CD0400551F75 /* PathActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathActionView.swift; sourceTree = "<group>"; };
 		748828A423E20E5E0064B1B7 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		748828A623E215BD0064B1B7 /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
 		748828A823E216B60064B1B7 /* FolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				749C6D5723E20A830003DE4D /* ContentView.swift */,
 				748828A823E216B60064B1B7 /* FolderView.swift */,
 				748828A623E215BD0064B1B7 /* PathView.swift */,
+				3ADD568623E2CD0400551F75 /* PathActionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				749C6D5823E20A830003DE4D /* ContentView.swift in Sources */,
+				3ADD568723E2CD0400551F75 /* PathActionView.swift in Sources */,
 				748828A523E20E5E0064B1B7 /* File.swift in Sources */,
 				748828AD23E217180064B1B7 /* Path.swift in Sources */,
 				748828A923E216B60064B1B7 /* FolderView.swift in Sources */,
