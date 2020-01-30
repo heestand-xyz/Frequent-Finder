@@ -12,20 +12,25 @@ struct PathView: View {
     @EnvironmentObject var ff: FF
     let path: Path
     var body: some View {
-        HStack {
-            if path is Folder {
-                Button(action: {
-                    self.ff.navigate(to: self.path as! Folder)
-                }) {
+        ZStack(alignment: .leading) {
+            if ff.selectedPath?.url == path.url {
+                Color.white.opacity(0.25)
+            }
+            HStack {
+                if path is Folder {
+                    Button(action: {
+                        self.ff.navigate(to: self.path as! Folder)
+                    }) {
+                        Text(path.name)
+                    }
+                    .foregroundColor(Color(hue: 0.5, saturation: frequencyFraction(), brightness: 1.0, opacity: 1.0))
+                } else {
                     Text(path.name)
                 }
-                .foregroundColor(Color(hue: 0.5, saturation: frequencyFraction(), brightness: 1.0, opacity: 1.0))
-            } else {
-                Text(path.name)
+                Text("\(path.frequencyCount)")
+                    .opacity(0.5)
+                PathActionView(path: path)
             }
-            Text("\(path.frequencyCount)")
-                .opacity(0.5)
-            PathActionView(path: path)
         }
     }
     func frequencyFraction() -> Double {

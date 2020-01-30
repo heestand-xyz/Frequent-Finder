@@ -20,8 +20,10 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
         didSet {
             currentFolder.fetchContents()
             canGoUp = currentFolder.url.path != "/"
+            selectedPath = currentFolder.contents?.first
         }
     }
+    @Published var selectedPath: Path?
     
     @Published var canGoUp: Bool = true
     
@@ -48,9 +50,14 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
         currentFolder = Folder(url, at: -1)
         
         super.init()
-        
+
         frequency = try! getFrequency()
         
+    }
+    
+    func didAppear() {
+        currentFolder.fetchContents()
+        selectedPath = currentFolder.contents?.first
     }
     
     // MARK: - Navigation
@@ -162,14 +169,38 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
         quickLookURL! as QLPreviewItem
     }
     
-}
-
-@discardableResult
-func shell(_ args: String...) -> Int32 {
-    let task = Process()
-    task.launchPath = "/usr/bin/env"
-    task.arguments = args
-    task.launch()
-    task.waitUntilExit()
-    return task.terminationStatus
+    // MARK: - Keys
+    
+    func keyUp() {
+        move(by: -1)
+    }
+    
+    func keyDown() {
+        move(by: 1)
+    }
+    
+    func keyEnter() {
+        guard let path: Path = selectedPath else { return }
+        if let file = path as? File {
+            open(file: file)
+        } else if let folder = path as? Folder {
+            navigate(to: folder)
+        }
+    }
+    
+    func keyBack() {
+        goUp()
+    }
+    
+    // MARK: - Move
+    
+    func move(by increment: Int) {
+        guard let path: Path = selectedPath else { return }
+        guard let paths: [Path] = currentFolder.contents else { return }
+        guard let oldIndex: Int = paths.firstIndex(where: { $0.url == path.url }) else { return }
+        let newIndex: Int = oldIndex + increment
+        guard newIndex >= 0 && newIndex < paths.count else { return }
+        selectedPath = paths[newIndex]
+    }
+    
 }

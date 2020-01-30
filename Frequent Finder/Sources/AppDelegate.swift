@@ -12,7 +12,7 @@ import SwiftUI
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    var window: NSWindow!
+    var window: CommandedWindow!
 
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             .environmentObject(FF.shared)
 
         // Create the window and set the content view. 
-        window = NSWindow(
+        window = CommandedWindow(
             contentRect: NSRect(x: 0, y: 0, width: 480, height: 300),
             styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
             backing: .buffered, defer: false)

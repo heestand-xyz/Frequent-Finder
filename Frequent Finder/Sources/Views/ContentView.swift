@@ -13,6 +13,9 @@ struct ContentView: View {
     var body: some View {
         FolderView(folder: ff.currentFolder)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onAppear {
+                self.ff.didAppear()
+        }
     }
 }
 

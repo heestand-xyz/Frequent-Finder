@@ -19,7 +19,7 @@ struct FolderView: View {
                         Button(action: {
                             self.ff.goUp()
                         }) {
-                            Text("<")
+                            Text("Up")
                         }
                         .disabled(!ff.canGoUp)
                         Text(folder.name)
@@ -27,14 +27,20 @@ struct FolderView: View {
                         PathActionView(path: folder as Path)
                     }
                 }) {
-                    if folder.contents != nil {
-                        ForEach(folder.contents!, id: \.url) { path in
-                            PathView(path: path)
+                    Group {
+                        if folder.contents != nil {
+                            ForEach(folder.contents!, id: \.url) { path in
+                                PathView(path: path)
+                                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                            }
+                            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        } else {
+                            Text("Folder is loading or there are no files in folder.")
                         }
-                    } else {
-                        Text("Folder is loading or there are no files in folder.")
                     }
+                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
             }
             HStack {
                 Text(folder.url.path)

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A35A8F723E2D8C600554894 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A35A8F623E2D8C600554894 /* Shell.swift */; };
+		3A35A8F923E2D8CC00554894 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A35A8F823E2D8CC00554894 /* Window.swift */; };
 		3ADD568723E2CD0400551F75 /* PathActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD568623E2CD0400551F75 /* PathActionView.swift */; };
 		748828A523E20E5E0064B1B7 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748828A423E20E5E0064B1B7 /* File.swift */; };
 		748828A723E215BD0064B1B7 /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748828A623E215BD0064B1B7 /* PathView.swift */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A35A8F623E2D8C600554894 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
+		3A35A8F823E2D8CC00554894 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		3ADD568623E2CD0400551F75 /* PathActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathActionView.swift; sourceTree = "<group>"; };
 		748828A423E20E5E0064B1B7 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		748828A623E215BD0064B1B7 /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 			isa = PBXGroup;
 			children = (
 				749C6D6D23E20AE40003DE4D /* FF.swift */,
+				3A35A8F623E2D8C600554894 /* Shell.swift */,
+				3A35A8F823E2D8CC00554894 /* Window.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -208,6 +214,7 @@
 			files = (
 				749C6D5823E20A830003DE4D /* ContentView.swift in Sources */,
 				3ADD568723E2CD0400551F75 /* PathActionView.swift in Sources */,
+				3A35A8F723E2D8C600554894 /* Shell.swift in Sources */,
 				748828A523E20E5E0064B1B7 /* File.swift in Sources */,
 				748828AD23E217180064B1B7 /* Path.swift in Sources */,
 				748828A923E216B60064B1B7 /* FolderView.swift in Sources */,
@@ -215,6 +222,7 @@
 				748828A723E215BD0064B1B7 /* PathView.swift in Sources */,
 				749C6D6E23E20AE40003DE4D /* FF.swift in Sources */,
 				748828AB23E217040064B1B7 /* Folder.swift in Sources */,
+				3A35A8F923E2D8CC00554894 /* Window.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
