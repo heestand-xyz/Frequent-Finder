@@ -4,17 +4,39 @@
 <dict>
 	<key>files</key>
 	<dict>
+		<key>Resources/AppIcon.icns</key>
+		<data>
+		44yOB9loZqBhZFZ5Nk5ANnBy3Qo=
+		</data>
+		<key>Resources/Assets.car</key>
+		<data>
+		UzEeoEs6JSmRhKEHGSBlbRa03OM=
+		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<data>
 		M1rS+Tcas1ZdM4/iibTlduTJ22M=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
 		<data>
-		rMk2eDzbzh6x43fo+hwAfzBjrdg=
+		ClYMI1SM8sGAHjMgD7LsEK7MVOc=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
+		<key>Resources/AppIcon.icns</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			FIky2R5e92IKTHiaCZOruChgPWKyLGUpvQvWHnt1Zeo=
+			</data>
+		</dict>
+		<key>Resources/Assets.car</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			GqzLcf9vhn4o/tcC8rJsv2r3IpEJQ6MrkFGkPy9OKmI=
+			</data>
+		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<dict>
 			<key>hash2</key>
@@ -26,7 +48,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			fyctKVTTbXxrbLVDFYotZmrBd5JOASfsldK6OK+qQxw=
+			lxfSVz0smFDgYWkrGXr0Vfo6LMm+1Jy75LKvFv6BVkI=
 			</data>
 		</dict>
 	</dict>
