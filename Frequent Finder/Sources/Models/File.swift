@@ -21,10 +21,5 @@ struct File: Path {
         self.url = url
         self.frequencyCount = frequencyCount
         icon = FF.icon(for: self)
-        log()
-    }
-    func log() {
-        let padding: String = .init(repeating: " ", count: depth)
-        print(padding + url.path)
     }
 }

@@ -23,9 +23,9 @@ class Folder: Path, ObservableObject {
         self.url = url
         self.frequencyCount = frequencyCount
         components = url.path.split(separator: "/").map({ String($0) })
-        log()
     }
     func fetchContents(done: @escaping () -> ()) {
+        guard contents == nil else { done(); return }
         DispatchQueue.global(qos: .background).async {
             let contents = self.getContents()
             DispatchQueue.main.async {
@@ -58,9 +58,5 @@ class Folder: Path, ObservableObject {
             print("FF Folder:", url, "Error:", error)
             return nil
         }
-    }
-    func log() {
-        let padding: String = .init(repeating: " ", count: depth)
-        print(padding + url.path)
     }
 }

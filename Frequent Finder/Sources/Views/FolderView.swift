@@ -35,7 +35,7 @@ struct FolderView: View {
                         if folder.contents != nil {
                             ForEach(folder.contents!, id: \.url) { path in
                                 PathView(path: path)
-                                    .padding(.top, self.over(limits: [1, 10, 100, 1000], for: path) ? 30 : 0)
+                                    .padding(.top, self.over(limits: [1, 10, 100, 1000], for: path) ? 15 : 0)
                             }
                         } else {
                             Text("Loading...")
@@ -85,7 +85,7 @@ struct FolderView: View {
         guard let contents: [Path] = self.folder.contents else { return false }
         guard let index: Int = contents.firstIndex(where: { $0.url == path.url }) else { return false }
         let prevIndex: Int = index - 1
-        guard prevIndex > 0 else { return false }
+        guard prevIndex >= 0 else { return false }
         let prevPath: Path = contents[prevIndex]
         guard prevPath.frequencyCount >= limit else { return false }
         return true
