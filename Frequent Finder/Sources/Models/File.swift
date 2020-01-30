@@ -6,7 +6,7 @@
 //  Copyright © 2020 Hexagons. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 
 struct File: Path {
     var id: URL { url }
@@ -14,11 +14,13 @@ struct File: Path {
     var name: String { url.lastPathComponent }
     var depth: Int { url.path.filter({ $0 == "/" }).count }
     let frequencyCount: Int
+    var icon: NSImage?
     init(_ url: URL, at frequencyCount: Int) {
         guard FF.exists(url: url) else { fatalError("url dose not exist") }
         guard !FF.isFolder(url: url) else { fatalError("url is not a file") }
         self.url = url
         self.frequencyCount = frequencyCount
+        icon = FF.icon(for: self)
         log()
     }
     func log() {

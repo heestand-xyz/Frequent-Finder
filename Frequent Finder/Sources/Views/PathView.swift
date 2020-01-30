@@ -14,27 +14,39 @@ struct PathView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             if ff.selectedPath?.url == path.url {
-                Color.white.opacity(0.25)
+                color().opacity(0.25)
             }
             HStack {
-                if path is Folder {
+                if path is File {
+                    if (path as! File).icon != nil {
+                        Image(nsImage: (path as! File).icon!)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 20, height: 20)
+                    }
+                    Text(path.name)
+                } else if path is Folder {
                     Button(action: {
                         self.ff.navigate(to: self.path as! Folder)
                     }) {
                         Text(path.name)
                     }
-                    .foregroundColor(Color(hue: 0.5, saturation: frequencyFraction(), brightness: 1.0, opacity: 1.0))
-                } else {
-                    Text(path.name)
+                    .colorMultiply(color(satMax: 0.5))
                 }
-                Text("\(path.frequencyCount)")
-                    .opacity(0.5)
+                Spacer()
+                if path.frequencyCount > 0 {
+                    Text("\(path.frequencyCount)")
+                        .opacity(0.5)
+                }
                 PathActionView(path: path)
             }
         }
     }
-    func frequencyFraction() -> Double {
-        min(Double(path.frequencyCount) / 10, 1.0)
+    func color(satMax: Double = 1.0) -> Color {
+        Color(hue: (1 / 6) + (2 / 3) - (2 / 3) * frequencyFraction(upTo: 100), saturation: frequencyFraction(upTo: 10) * satMax, brightness: 1.0, opacity: 1.0)
+    }
+    func frequencyFraction(upTo: Int) -> Double {
+        min(Double(path.frequencyCount) / Double(upTo), 1.0)
     }
 }
 

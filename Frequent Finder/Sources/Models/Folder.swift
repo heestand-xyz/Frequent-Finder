@@ -15,16 +15,25 @@ class Folder: Path, ObservableObject {
     var depth: Int { url.path.filter({ $0 == "/" }).count }
     let frequencyCount: Int
     @Published var contents: [Path]?
+    let components: [String]
+    @Published var isGitRoot: Bool?
     init(_ url: URL, at frequencyCount: Int) {
         guard FF.exists(url: url) else { fatalError("url dose not exist") }
         guard FF.isFolder(url: url) else { fatalError("url is not a folder") }
         self.url = url
         self.frequencyCount = frequencyCount
+        components = url.path.split(separator: "/").map({ String($0) })
         log()
     }
-    func fetchContents() {
-        contents = getContents()
-        sortContents()
+    func fetchContents(done: @escaping () -> ()) {
+        DispatchQueue.global(qos: .background).async {
+            let contents = self.getContents()
+            DispatchQueue.main.async {
+                self.contents = contents
+                self.sortContents()
+                done()
+            }
+        }
     }
     func sortContents() {
         contents = contents?.sorted(by: { pathA, pathB -> Bool in
@@ -33,9 +42,13 @@ class Folder: Path, ObservableObject {
     }
     func getContents() -> [Path]? {
         do {
-            let paths: [String] = try FF.fm.contentsOfDirectory(atPath: url.path)
-            let filtered: [String] = paths.filter({ $0.first != "." })
-            let urls: [URL] = filtered.map({ url.appendingPathComponent($0) })
+            let rawContent: [String] = try FF.fm.contentsOfDirectory(atPath: url.path)
+            let isGit: Bool = rawContent.contains(".git")
+            DispatchQueue.main.async {
+                self.isGitRoot = isGit
+            }
+            let filteredContent: [String] = rawContent.filter({ $0.first != "." })
+            let urls: [URL] = filteredContent.map({ url.appendingPathComponent($0) })
             let files: [Path] = urls.map({ url -> Path in
                 let frequencyCount: Int = FF.frequencyCount(for: url)
                 return FF.isFolder(url: url) ? Folder(url, at: frequencyCount) : File(url, at: frequencyCount)

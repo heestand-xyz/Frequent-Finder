@@ -14,6 +14,7 @@ class CommandedWindow: NSWindow {
     override func keyDown(with event: NSEvent) {}
     
     override func keyUp(with event: NSEvent) {
+        print(event.keyCode)
         switch event.keyCode {
         case 36: // Enter
             FF.shared.keyEnter()
@@ -23,6 +24,8 @@ class CommandedWindow: NSWindow {
             FF.shared.keyDown()
         case 51: // Back
             FF.shared.keyBack()
+        case 49: // Space
+            FF.shared.keySpace()
         default:
             break
         }

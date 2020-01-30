@@ -18,9 +18,10 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
     
     @Published var currentFolder: Folder {
         didSet {
-            currentFolder.fetchContents()
+            currentFolder.fetchContents {
+                self.selectedPath = self.currentFolder.contents?.first
+            }
             canGoUp = currentFolder.url.path != "/"
-            selectedPath = currentFolder.contents?.first
         }
     }
     @Published var selectedPath: Path?
@@ -56,8 +57,9 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
     }
     
     func didAppear() {
-        currentFolder.fetchContents()
-        selectedPath = currentFolder.contents?.first
+        currentFolder.fetchContents {
+            self.selectedPath = self.currentFolder.contents?.first
+        }
     }
     
     // MARK: - Navigation
@@ -128,9 +130,10 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
     
     func showInFinder(path: Path) {
         if let folder = path as? Folder {
-            folder.fetchContents()
-            guard let firstSubPath: Path = folder.contents?.first else { return }
-            NSWorkspace.shared.activateFileViewerSelecting([firstSubPath.url])
+            folder.fetchContents {
+                guard let firstSubPath: Path = folder.contents?.first else { return }
+                NSWorkspace.shared.activateFileViewerSelecting([firstSubPath.url])
+            }
         } else {
             NSWorkspace.shared.activateFileViewerSelecting([path.url])
         }
@@ -192,6 +195,11 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
         goUp()
     }
     
+    func keySpace() {
+        guard let file: File = selectedPath as? File else { return }
+        quickLook(file: file)
+    }
+    
     // MARK: - Move
     
     func move(by increment: Int) {
@@ -201,6 +209,20 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
         let newIndex: Int = oldIndex + increment
         guard newIndex >= 0 && newIndex < paths.count else { return }
         selectedPath = paths[newIndex]
+    }
+    
+    // MARK: - Icon
+    
+    static func icon(for file: File) -> NSImage? {
+        let fileType: String = file.url.pathExtension
+        if ["png", "jpg"].contains(fileType.lowercased()) {
+            return image(for: file.url)
+        }
+        return NSWorkspace.shared.icon(forFileType: fileType)
+    }
+    
+    static func image(for url: URL) -> NSImage? {
+        NSImage(contentsOf: url)
     }
     
 }
