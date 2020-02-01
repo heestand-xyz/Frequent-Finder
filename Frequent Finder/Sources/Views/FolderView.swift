@@ -15,27 +15,23 @@ struct FolderView: View {
         VStack {
             List {
                 Section(header: ZStack {
-                    if folder.isGitRoot == true {
-                        Color.orange.opacity(0.5)
-                    }
                     HStack {
                         Button(action: {
                             self.ff.goUp()
                         }) {
                             Text("Up")
                         }
-                        .disabled(!ff.canGoUp)
-                        Text(folder.name)
-                            .font(.headline)
+                            .disabled(!ff.canGoUp)
+                        NameView(path: folder, font: .headline)
                         PathActionView(path: folder as Path)
                         Spacer()
                     }
                 }) {
                     Group {
                         if folder.contents != nil {
-                            ForEach(folder.contents!, id: \.url) { path in
+                            ForEach(folder.contents!) { path in
                                 PathView(path: path)
-                                    .padding(.top, self.over(limits: [1, 10, 100, 1000], for: path) ? 15 : 0)
+                                    .padding(.top, self.over(limits: [10, 100, 1000], for: path) ? 15 : 0)
                             }
                         } else {
                             Text("Loading...")
@@ -47,19 +43,10 @@ struct FolderView: View {
                 Group {
                     ForEach(folder.components, id: \.self) { component in
                         Button(action: {
-                            let allSections: [String] = self.folder.components.map({ String($0) })
-                            var targetSections: [String] = []
-                            guard let index: Int = self.folder.components.firstIndex(of: component) else { return }
-                            for (i, section) in allSections.enumerated() {
-                                guard i <= index else { break }
-                                targetSections.append(section)
-                            }
-                            let url: URL = URL(fileURLWithPath: "/" + targetSections.joined(separator: "/"))
-                            let frequencyCount: Int = FF.frequencyCount(for: url)
-                            let folder: Folder = Folder(url, at: frequencyCount)
+                            guard let folder: Folder = self.folder(from: component) else { return }
                             self.ff.navigate(to: folder)
                         }) {
-                            Text(component)
+                            NameView(path: self.folder(from: component) ?? Folder(URL(fileURLWithPath: "/"), at: 0), font: .system(size: 13))
                         }
                             .disabled(component == self.folder.components.last)
                     }
@@ -71,6 +58,19 @@ struct FolderView: View {
         .onAppear {
             self.folder.fetchContents(done: {})
         }
+    }
+    func folder(from component: String) -> Folder? {
+        let allSections: [String] = self.folder.components.map({ String($0) })
+        var targetSections: [String] = []
+        guard let index: Int = self.folder.components.firstIndex(of: component) else { return nil }
+        for (i, section) in allSections.enumerated() {
+            guard i <= index else { break }
+            targetSections.append(section)
+        }
+        let url: URL = URL(fileURLWithPath: "/" + targetSections.joined(separator: "/"))
+        let frequencyCount: Int = FF.frequencyCount(for: url)
+        let folder: Folder = Folder(url, at: frequencyCount)
+        return folder
     }
     func over(limits: [Int], for path: Path) -> Bool {
         for limit in limits {

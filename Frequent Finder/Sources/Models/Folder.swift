@@ -8,21 +8,16 @@
 
 import Foundation
 
-class Folder: Path, ObservableObject {
-    var id: URL { url }
-    let url: URL
-    var name: String { url.lastPathComponent }
-    var depth: Int { url.path.filter({ $0 == "/" }).count }
-    let frequencyCount: Int
+class Folder: Path {
     @Published var contents: [Path]?
     let components: [String]
     @Published var isGitRoot: Bool?
-    init(_ url: URL, at frequencyCount: Int) {
+    override init(_ url: URL, at frequencyCount: Int) {
         guard FF.exists(url: url) else { fatalError("url dose not exist") }
         guard FF.isFolder(url: url) else { fatalError("url is not a folder") }
-        self.url = url
-        self.frequencyCount = frequencyCount
         components = url.path.split(separator: "/").map({ String($0) })
+        super.init(url, at: frequencyCount)
+        fetchIsGitRoot()
     }
     func fetchContents(done: @escaping () -> ()) {
         guard contents == nil else { done(); return }
@@ -43,10 +38,6 @@ class Folder: Path, ObservableObject {
     func getContents() -> [Path]? {
         do {
             let rawContent: [String] = try FF.fm.contentsOfDirectory(atPath: url.path)
-            let isGit: Bool = rawContent.contains(".git")
-            DispatchQueue.main.async {
-                self.isGitRoot = isGit
-            }
             let filteredContent: [String] = rawContent.filter({ $0.first != "." })
             let urls: [URL] = filteredContent.map({ url.appendingPathComponent($0) })
             let files: [Path] = urls.map({ url -> Path in
@@ -57,6 +48,15 @@ class Folder: Path, ObservableObject {
         } catch {
             print("FF Folder:", url, "Error:", error)
             return nil
+        }
+    }
+    func fetchIsGitRoot() {
+        DispatchQueue.global(qos: .background).async {
+            guard let rawContent: [String] = try? FF.fm.contentsOfDirectory(atPath: self.url.path) else { return }
+            let isGit: Bool = rawContent.contains(".git")
+            DispatchQueue.main.async {
+                self.isGitRoot = isGit
+            }
         }
     }
 }

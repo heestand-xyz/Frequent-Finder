@@ -66,7 +66,13 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
     
     func navigate(to folder: Folder) {
         currentFolder = folder
-        incrementFrequency(url: folder.url)
+        incrementFrequency(path: folder)
+    }
+    
+    func incrementFrequency(path: Path) {
+        path.frequencyCount += 1
+        incrementFrequency(url: path.url)
+        currentFolder.sortContents()
     }
     
     func incrementFrequency(url: URL) {
@@ -81,6 +87,7 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
         guard canGoUp else { return }
         let url: URL = currentFolder.url.deletingLastPathComponent()
         currentFolder = Folder(url, at: FF.frequencyCount(for: url))
+        incrementFrequency(path: currentFolder)
     }
     
     // MARK: - Frequency
@@ -125,7 +132,7 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
     
     func open(file: File) {
         shell("open", file.url.path)
-        incrementFrequency(url: file.url)
+        incrementFrequency(path: file)
     }
     
     func showInFinder(path: Path) {
@@ -137,7 +144,7 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
         } else {
             NSWorkspace.shared.activateFileViewerSelecting([path.url])
         }
-        incrementFrequency(url: path.url)
+        incrementFrequency(path: path)
     }
     
     func showInTerminal(folder: Folder) {
@@ -149,7 +156,7 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
 //                                           configuration: configuration,
 //                                           completionHandler: nil)
         shell("open", "-a", "Terminal", folder.url.path)
-        incrementFrequency(url: folder.url)
+        incrementFrequency(path: folder)
     }
     
     func quickLook(file: File) {
@@ -159,7 +166,7 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
             sharedPanel.dataSource = self
             sharedPanel.makeKeyAndOrderFront(self)
         }
-        incrementFrequency(url: file.url)
+        incrementFrequency(path: file)
     }
     
     // MARK: - QuickLook Delegates
@@ -196,8 +203,9 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
     }
     
     func keySpace() {
-        guard let file: File = selectedPath as? File else { return }
-        quickLook(file: file)
+        if let file: File = selectedPath as? File {
+            quickLook(file: file)
+        }
     }
     
     // MARK: - Move

@@ -8,18 +8,12 @@
 
 import Cocoa
 
-struct File: Path {
-    var id: URL { url }
-    let url: URL
-    var name: String { url.lastPathComponent }
-    var depth: Int { url.path.filter({ $0 == "/" }).count }
-    let frequencyCount: Int
+class File: Path {
     var icon: NSImage?
-    init(_ url: URL, at frequencyCount: Int) {
+    override init(_ url: URL, at frequencyCount: Int) {
         guard FF.exists(url: url) else { fatalError("url dose not exist") }
         guard !FF.isFolder(url: url) else { fatalError("url is not a file") }
-        self.url = url
-        self.frequencyCount = frequencyCount
+        super.init(url, at: frequencyCount)
         icon = FF.icon(for: self)
     }
 }

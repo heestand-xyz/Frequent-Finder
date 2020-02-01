@@ -8,9 +8,17 @@
 
 import Foundation
 
-protocol Path {
-    var url: URL { get }
-    var depth: Int { get }
-    var name: String { get }
-    var frequencyCount: Int { get }
+class Path: ObservableObject, Identifiable, Equatable {
+    var id: URL { url }
+    var url: URL
+    var name: String { url.lastPathComponent }
+    var depth: Int { url.path.filter({ $0 == "/" }).count }
+    @Published var frequencyCount: Int
+    internal init(_ url: URL, at frequencyCount: Int) {
+        self.url = url
+        self.frequencyCount = frequencyCount
+    }
+    static func == (lhs: Path, rhs: Path) -> Bool {
+        lhs.id == rhs.id
+    }
 }

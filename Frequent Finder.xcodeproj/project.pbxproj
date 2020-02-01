@@ -21,6 +21,7 @@
 		749C6D5D23E20A840003DE4D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 749C6D5C23E20A840003DE4D /* Preview Assets.xcassets */; };
 		749C6D6023E20A840003DE4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 749C6D5E23E20A840003DE4D /* Main.storyboard */; };
 		749C6D6E23E20AE40003DE4D /* FF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C6D6D23E20AE40003DE4D /* FF.swift */; };
+		74E1F9FE23E5C1FE00DD5441 /* NameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E1F9FD23E5C1FE00DD5441 /* NameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		749C6D6123E20A840003DE4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		749C6D6223E20A840003DE4D /* Frequent_Finder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Frequent_Finder.entitlements; sourceTree = "<group>"; };
 		749C6D6D23E20AE40003DE4D /* FF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FF.swift; sourceTree = "<group>"; };
+		74E1F9FD23E5C1FE00DD5441 /* NameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				748828A823E216B60064B1B7 /* FolderView.swift */,
 				748828A623E215BD0064B1B7 /* PathView.swift */,
 				3ADD568623E2CD0400551F75 /* PathActionView.swift */,
+				74E1F9FD23E5C1FE00DD5441 /* NameView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				3A35A8F723E2D8C600554894 /* Shell.swift in Sources */,
 				748828A523E20E5E0064B1B7 /* File.swift in Sources */,
 				748828AD23E217180064B1B7 /* Path.swift in Sources */,
+				74E1F9FE23E5C1FE00DD5441 /* NameView.swift in Sources */,
 				748828A923E216B60064B1B7 /* FolderView.swift in Sources */,
 				749C6D5623E20A830003DE4D /* AppDelegate.swift in Sources */,
 				748828A723E215BD0064B1B7 /* PathView.swift in Sources */,
@@ -360,7 +364,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Frequent Finder/Resources/Frequent_Finder.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Frequent Finder/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -371,7 +375,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.hexagons.Frequent-Finder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -385,7 +389,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Frequent Finder/Resources/Frequent_Finder.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Frequent Finder/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -396,7 +400,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.hexagons.Frequent-Finder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
