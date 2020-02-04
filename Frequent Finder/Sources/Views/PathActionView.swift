@@ -13,11 +13,6 @@ struct PathActionView: View {
     let path: Path
     var body: some View {
         HStack {        
-            Button(action: {
-                self.ff.showInFinder(path: self.path)
-            }) {
-                Text("Finder")
-            }
             if path is File {
                 Button(action: {
                     self.ff.open(file: self.path as! File)
@@ -29,13 +24,17 @@ struct PathActionView: View {
                 }) {
                     Text("Quick Look")
                 }
-            }
-            if path is Folder {
+            } else if path is Folder {
                 Button(action: {
                     self.ff.showInTerminal(folder: self.path as! Folder)
                 }) {
                     Text("Terminal")
                 }
+            }
+            Button(action: {
+                self.ff.showInFinder(path: self.path)
+            }) {
+                Text("Finder")
             }
         }
     }

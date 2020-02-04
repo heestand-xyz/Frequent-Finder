@@ -15,6 +15,8 @@ struct PathView: View {
         ZStack(alignment: .leading) {
             if ff.selectedPath?.url == path.url {
                 Color.white.opacity(0.25)
+            } else {
+                Color.white.opacity(0.025)
             }
             HStack {
                 if path is File {
@@ -39,6 +41,13 @@ struct PathView: View {
                         .opacity(0.5)
                 }
                 PathActionView(path: path)
+            }
+        }
+        .onTapGesture {
+            if self.ff.selectedPath == self.path {
+                self.ff.enter(path: self.path)
+            } else {
+                self.ff.selectedPath = self.path
             }
         }
     }

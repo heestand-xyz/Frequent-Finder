@@ -64,6 +64,14 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
     
     // MARK: - Navigation
     
+    func enter(path: Path) {
+        if let file = path as? File {
+            open(file: file)
+        } else if let folder = path as? Folder {
+            navigate(to: folder)
+        }
+    }
+    
     func navigate(to folder: Folder) {
         currentFolder = folder
         incrementFrequency(path: folder)
@@ -191,11 +199,7 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
     
     func keyEnter() {
         guard let path: Path = selectedPath else { return }
-        if let file = path as? File {
-            open(file: file)
-        } else if let folder = path as? Folder {
-            navigate(to: folder)
-        }
+        enter(path: path)
     }
     
     func keyBack() {
@@ -206,6 +210,16 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
         if let file: File = selectedPath as? File {
             quickLook(file: file)
         }
+    }
+    
+    func keyF() {
+        guard let path: Path = selectedPath else { return }
+        showInFinder(path: path)
+    }
+    
+    func keyT() {
+        guard let folder: Folder = selectedPath as? Folder else { return }
+        showInTerminal(folder: folder)
     }
     
     // MARK: - Move

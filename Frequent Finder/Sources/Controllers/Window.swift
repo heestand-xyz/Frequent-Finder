@@ -26,6 +26,10 @@ class CommandedWindow: NSWindow {
             FF.shared.keyBack()
         case 49: // Space
             FF.shared.keySpace()
+        case 3: // F
+            FF.shared.keyF()
+        case 17: // T
+            FF.shared.keyT()
         default:
             break
         }
