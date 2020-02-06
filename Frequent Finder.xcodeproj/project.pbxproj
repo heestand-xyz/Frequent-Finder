@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3A35A8F723E2D8C600554894 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A35A8F623E2D8C600554894 /* Shell.swift */; };
 		3A35A8F923E2D8CC00554894 /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A35A8F823E2D8CC00554894 /* Window.swift */; };
+		3A5A0CCF23EC0D3A00354DEE /* FrequentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A0CCE23EC0D3A00354DEE /* FrequentView.swift */; };
+		3A5A0CD123EC0E7000354DEE /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5A0CD023EC0E7000354DEE /* ItemView.swift */; };
 		3ADD568723E2CD0400551F75 /* PathActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD568623E2CD0400551F75 /* PathActionView.swift */; };
 		748828A523E20E5E0064B1B7 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748828A423E20E5E0064B1B7 /* File.swift */; };
 		748828A723E215BD0064B1B7 /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748828A623E215BD0064B1B7 /* PathView.swift */; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		3A35A8F623E2D8C600554894 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		3A35A8F823E2D8CC00554894 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
+		3A5A0CCE23EC0D3A00354DEE /* FrequentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequentView.swift; sourceTree = "<group>"; };
+		3A5A0CD023EC0E7000354DEE /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		3ADD568623E2CD0400551F75 /* PathActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathActionView.swift; sourceTree = "<group>"; };
 		3AE2122723E97C8E00E2D15B /* Document.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
 		748828A423E20E5E0064B1B7 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -121,7 +125,9 @@
 				748828A823E216B60064B1B7 /* FolderView.swift */,
 				748828A623E215BD0064B1B7 /* PathView.swift */,
 				3ADD568623E2CD0400551F75 /* PathActionView.swift */,
+				3A5A0CD023EC0E7000354DEE /* ItemView.swift */,
 				74E1F9FD23E5C1FE00DD5441 /* NameView.swift */,
+				3A5A0CCE23EC0D3A00354DEE /* FrequentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,6 +225,7 @@
 			files = (
 				749C6D5823E20A830003DE4D /* ContentView.swift in Sources */,
 				3ADD568723E2CD0400551F75 /* PathActionView.swift in Sources */,
+				3A5A0CCF23EC0D3A00354DEE /* FrequentView.swift in Sources */,
 				3A35A8F723E2D8C600554894 /* Shell.swift in Sources */,
 				748828A523E20E5E0064B1B7 /* File.swift in Sources */,
 				748828AD23E217180064B1B7 /* Path.swift in Sources */,
@@ -227,6 +234,7 @@
 				749C6D5623E20A830003DE4D /* AppDelegate.swift in Sources */,
 				748828A723E215BD0064B1B7 /* PathView.swift in Sources */,
 				749C6D6E23E20AE40003DE4D /* FF.swift in Sources */,
+				3A5A0CD123EC0E7000354DEE /* ItemView.swift in Sources */,
 				748828AB23E217040064B1B7 /* Folder.swift in Sources */,
 				3A35A8F923E2D8CC00554894 /* Window.swift in Sources */,
 			);
@@ -366,7 +374,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Frequent Finder/Resources/Frequent_Finder.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Frequent Finder/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -377,7 +385,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.hexagons.Frequent-Finder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -391,7 +399,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Frequent Finder/Resources/Frequent_Finder.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"Frequent Finder/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 2QHTY6FMW2;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -402,7 +410,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.hexagons.Frequent-Finder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

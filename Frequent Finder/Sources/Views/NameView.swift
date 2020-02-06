@@ -10,7 +10,7 @@ import SwiftUI
 
 struct NameView: View {
     @ObservedObject var path: Path
-    let font: Font
+    var font: Font = .system(size: 13)
     var body: some View {
         HStack {
             if path.frequencyCount >= 10 {

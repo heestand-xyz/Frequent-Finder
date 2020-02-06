@@ -11,10 +11,14 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var ff: FF
     var body: some View {
-        FolderView(folder: ff.currentFolder)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .onAppear {
-                self.ff.didAppear()
+        HStack(spacing: 0) {
+            FrequentView()
+            Divider()
+            FolderView(folder: ff.currentFolder)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .onAppear {
+                    self.ff.didAppear()
+            }
         }
     }
 }

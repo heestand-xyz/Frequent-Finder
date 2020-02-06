@@ -19,22 +19,7 @@ struct PathView: View {
                 Color.white.opacity(0.025)
             }
             HStack {
-                if path is File {
-                    if (path as! File).icon != nil {
-                        Image(nsImage: (path as! File).icon!)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 20)
-                    }
-                    NameView(path: path, font: .system(size: 13))
-                } else if path is Folder {
-                    Button(action: {
-                        self.ff.navigate(to: self.path as! Folder)
-                    }) {
-                        NameView(path: path, font: .system(size: 13))
-                    }
-//                    .colorMultiply(color(satMax: 0.5))
-                }
+                ItemView(path: path)
                 Spacer()
                 if path.frequencyCount > 0 {
                     Text("\(path.frequencyCount)")

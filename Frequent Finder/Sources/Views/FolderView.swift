@@ -46,7 +46,7 @@ struct FolderView: View {
                             guard let folder: Folder = self.folder(from: component) else { return }
                             self.ff.navigate(to: folder)
                         }) {
-                            NameView(path: self.folder(from: component) ?? Folder(URL(fileURLWithPath: "/"), at: 0), font: .system(size: 13))
+                            NameView(path: self.folder(from: component) ?? Folder(URL(fileURLWithPath: "/"), at: 0))
                         }
                             .disabled(component == self.folder.components.last)
                     }

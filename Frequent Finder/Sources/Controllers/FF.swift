@@ -26,6 +26,9 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
     }
     @Published var selectedPath: Path?
     
+    static let frequentBar: Int = 10
+    @Published var frequentFolders: [Folder] = []
+    
     @Published var canGoUp: Bool = true
     
     var quickLookURL: URL?
@@ -33,6 +36,7 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
     typealias Frequency = [URL: Int]
     var frequency: Frequency! {
         didSet {
+            filterFrequentFolders()
             do {
                 try setFrequency(frequency)
             } catch {
@@ -53,6 +57,7 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
         super.init()
 
         frequency = try! getFrequency()
+        filterFrequentFolders()
         
     }
     
@@ -121,6 +126,22 @@ class FF: NSObject, ObservableObject, QLPreviewPanelDataSource, QLPreviewPanelDe
             throw FFError.frequency("Set Json Failed")
         }
         UserDefaults.standard.set(json, forKey: "frequent-finder-frequency")
+    }
+    
+    func filterFrequentFolders() {
+        frequentFolders = frequency.filter({ frequency -> Bool in
+            let url: URL = frequency.key
+            let frequencyCount: Int = frequency.value
+            return FF.exists(url: url) && FF.isFolder(url: url) && frequencyCount >= FF.frequentBar
+        }).sorted(by: { frequencyA, frequencyB -> Bool in
+            frequencyA.key.lastPathComponent > frequencyB.key.lastPathComponent
+        }).sorted(by: { frequencyA, frequencyB -> Bool in
+            frequencyA.value > frequencyB.value
+        }).map({ frequency -> Folder in
+            let url: URL = frequency.key
+            let frequencyCount: Int = frequency.value
+            return Folder(url, at: frequencyCount)
+        })
     }
     
     // MARK: - Util
